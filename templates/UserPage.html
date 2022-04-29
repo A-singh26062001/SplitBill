@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User-Page</title>
+</head>
+<body>
+    <h1>Hi {{ name }} you are Logged In!!</h1>
+    <a href="{{ url_for('logout') }}"><button>Log-Out</button></a>
+    <h1>Your Friend List</h1>
+    {% for user in allusers %}
+    <div>
+        <h3>
+            {{ user.username }}
+            {{ user.email }}
+            <button>Add Friend</button>
+        </h3>
+    </div>
+    {% endfor %}
+</body>
+</html>
