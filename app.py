@@ -5,8 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager,UserMixin
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed,FileField
-from requests import request
-from wtforms import StringField,PasswordField,SubmitField,BooleanField
+from requests import request, session
+from wtforms import StringField,PasswordField,SubmitField,BooleanField,IntegerField
 from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError
 from flask_bcrypt import Bcrypt
 import bcrypt
@@ -15,7 +15,7 @@ from flask_login import UserMixin
 from flask_login import LoginManager
 import sqlite3
 from datetime import datetime
-
+from sqlalchemy import or_
 app=Flask(__name__)
 
 #for login
@@ -44,22 +44,21 @@ class User(db.Model,UserMixin):
     username=db.Column(db.String(20),unique=True,nullable=False)
     email=db.Column(db.String(120),unique=True,nullable=False)
     password=db.Column(db.String(60),nullable=False)
-    transactions=db.relationship('Transaction',backref='user')
+    transactions=db.relationship('Transaction',backref='user',lazy='dynamic')
 
-    def __init__(self,username,email,password):
-        self.username=username
-        self.email=email
-        self.password=password
+    # def __init__(self,username,email,password):
+    #     self.username=username
+    #     self.email=email
+    #     self.password=password
 
 class Transaction(db.Model):
     id=db.Column(db.Integer,primary_key=True)
-    user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
     borrower_name=db.Column(db.String(200),nullable=False)
     amt=db.Column(db.Integer,nullable=True)
     desc=db.Column(db.String(200),nullable=False)
     date_created=db.Column(db.DateTime,default=datetime.utcnow)
     settlement=db.Column(db.Boolean,default=False,nullable=False)
-    
+    user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
     # def __init__(self,owner_name,borrower_name,amt,desc,settlement):
     #     self.owner_name=owner_name
     #     self.settlement=settlement
@@ -96,6 +95,11 @@ class LoginForm(FlaskForm):
     remember=BooleanField('Remember Me')
     submit=SubmitField('Login')
 
+class TransactionForm(FlaskForm):
+    amount=IntegerField('Enter the Amount',validators=[DataRequired()])
+    desc=StringField('Enter the item name',validators=[DataRequired()])
+    submit=SubmitField('ADD FRIENDS')
+
 
 # @app.route('/')
 # def login():
@@ -112,7 +116,7 @@ def register():
         user=User(username=form.username.data, email=form.email.data, password=hashed_pwd)
         db.session.add(user)
         db.session.commit()
-        flash('Your account has been created! You are now logged in ','success')
+        flash('Your account has been created!','success')
         return redirect(url_for('login'))
     return render_template('regis.html',form=form)
 
@@ -120,22 +124,81 @@ def register():
 @app.route('/',methods=['POST','GET'])
 def login():
     if current_user.is_authenticated:
-        return render_template('UserPage.html')
+        # form=TransactionForm()
+        # return redirect(url_for('userpage',username=current_user.username))
+        # return redirect(url_for('userpage'))
+        return render_template('UserPage.html',name=current_user.username)
     form=LoginForm()
     if form.validate_on_submit():
         user=User.query.filter_by(username=form.username.data).first()
         if user and bcrypt.check_password_hash(user.password,form.password.data):
             login_user(user,remember=form.remember.data)
             name=form.username.data
-            allusers=User.query.filter(User.username!=current_user.username)
-            return render_template('UserPage.html',allusers=allusers,name=name)
-            # return redirect(url_for('home',users=users))
+            # form=TransactionForm()
+            # return redirect(url_for('userpage',curr_user=current_user))
+            return redirect(url_for('userpage',username=name))
+            # return render_template('UserPage.html',name=name)
+            # return redirect(url_for('userpage',name=name,allusers=allusers))
         else:
             flash("Login Unsuccessful. Please check the email and password")
     return  render_template('login.html',title='Login',form=form)
-# @app.route('/UserPage')
-# def home():
-#     return render_template('UserPage.html')
+
+@app.route('/UserPage/<string:username>',methods=['POST','GET'])
+@login_required
+def userpage(username):
+    form=TransactionForm()
+    if form.validate_on_submit():
+        amount=form.amount.data
+        desc=form.desc.data
+        # userfriends=User.query.filter(User.username!=current_user.username)
+        # return render_template('Friends.html',name=current_user.username,amount=amount,desc=desc,userfriends=userfriends)
+        return redirect(url_for('friends',amount=amount,desc=desc,len=0))
+
+    return render_template('UserPage.html',name=username,form=form)
+
+
+@app.route('/Friend/<int:amount>/<string:desc>/<int:len>',methods=['POST','GET'])
+@login_required
+def friends(amount,desc,len):
+    userfriends=User.query.filter(User.username!=current_user.username)
+    return render_template('Friends.html',userfriends=userfriends,name=current_user.username,amount=amount,desc=desc,len=len)
+
+ids=[]
+@app.route('/Selectfriends/<int:amount>/<string:desc>/<int:id>')
+@login_required
+def selectfriends(amount,desc,id):
+    ids.append(id)
+    return redirect(url_for('friends',amount=amount,desc=desc,len=len(ids)))
+
+@app.route('/Addfriend/<int:amount>/<string:desc>')
+@login_required
+def addfriend(amount,desc):
+    amt=amount/(len(ids)+1)
+    for i in range(len(ids)):
+        borr=User.query.filter_by(id=ids[i]).first()
+        t=Transaction(borrower_name=borr.username,amt=amt,desc=desc,settlement=False,user=current_user)
+        db.session.add(t)
+        db.session.commit()
+    ids.clear()
+    return redirect(url_for('dashboard',username=current_user.username))
+    trans=Transaction.query.filter(or_(Transaction.borrower_name==current_user.username,Transaction.user_id==current_user.id))
+    return render_template('Dashboard.html',trans=trans)
+
+@app.route('/Dashboard/<string:username>')
+@login_required
+def dashboard(username):
+    trans=Transaction.query.filter(or_(Transaction.borrower_name==current_user.username,Transaction.user_id==current_user.id))
+    return render_template('Dashboard.html',trans=trans)
+
+@app.route('/Dashboard/<int:id>')
+@login_required
+def settletrans(id):
+    tran_del=Transaction.query.get(id)
+    db.session.delete(tran_del)
+    db.session.commit()
+    return redirect(url_for('dashboard',username=current_user.username))
+
+
 
 @app.route('/logout')
 def logout():
