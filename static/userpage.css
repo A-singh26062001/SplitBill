@@ -5,7 +5,7 @@
   }
   
   body {
-    background: linear-gradient(45deg, #ed6199 0%, #e8d6da ,#ed6199 100%);
+    background: linear-gradient(to right, #7d445b 0%, #e2768d 100%);
     font-size: 12px;
   }
   
@@ -152,7 +152,7 @@
     }
     
   .content h2:nth-child(2) {
-      color: #e91a6d;
+      color: #ffffff;
       animation: animate 4s ease-in-out infinite;
     }
     
