@@ -7,7 +7,7 @@
 //     //     btn.innerText= "ADD FRIEND";
 //     }
 // });
-function change_txt()
+function change();
 {
-    document.getElementById("btn").innerHTML="ADDED";
+    document.getElementById("Button").innerHTML="ADDED";
 }
