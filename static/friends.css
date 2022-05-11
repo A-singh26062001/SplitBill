@@ -5,8 +5,11 @@
   }
   
   body {
-    background: linear-gradient(to right, #7d445b 0%, #e2768d 100%);
+    /* background: linear-gradient(to right, #7d445b 0%, #e2768d 100%); */
     font-size: 12px;
+    background-image: url("bg1.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 200%;
   }
   
   body, button, input {
@@ -335,7 +338,7 @@ nav:hover {
     background:transparent;
     border-color:#ea1d6f;
     border-radius: 10px;
-    color: #ea1d6f;
+    color: #e5d4db;
     font-size: 20px;
     font-weight: 100;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -344,7 +347,7 @@ nav:hover {
 
   }
   .add-friend:hover {
-    color: #ebe4e7;
+    color: #e68eb4;
   }
 
   .app-form-button:hover {

@@ -5,8 +5,11 @@
   }
   
   body {
-    background: linear-gradient(to right, #7d445b 0%, #e2768d 100%);
+    /* background: linear-gradient(to right, #efbacf 0%, #6fe7e5 120%); */
     font-size: 12px;
+    background-image: url("bg1.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 200%;
   }
   
   /* .nav-btn {
@@ -152,7 +155,7 @@
     }
     
   .content h2:nth-child(2) {
-      color: #ffffff;
+      color: #da3d3d;
       animation: animate 4s ease-in-out infinite;
     }
     
@@ -193,7 +196,8 @@
     width: 80%;
     margin-left: 10%;
     margin-top: 10%;
-    background: #3f3d3d;
+    background: #252424;
+    /* backdrop-filter: saturate(180%) blur(10px); */
     border-radius: 15px;
   }
   
@@ -377,9 +381,9 @@
     width: 40%;
     text-decoration: none;
     background:transparent;
-    border-color:#ea1d6f;
+    border-color:#ed7d45;
     border-radius: 10px;
-    color: #ea1d6f;
+    color: #f0f4f4;
     font-size: 30px;
     font-weight: 100;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -389,7 +393,7 @@
   }
   
   .app-form-button:hover {
-    color: #ebe4e7;
+    color: #8cdee0;
   }
   
   .credits {
