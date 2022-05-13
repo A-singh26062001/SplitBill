@@ -19,8 +19,50 @@
             <a href="/Dashboard/{{ name }}" class="arc">DASHBOARD</a>
             <a class="arc" href="{{ url_for('logout') }}">LOGOUT</a>
           </nav>
-        <div class="container">
-            <!-- <a href="{{ url_for('logout') }}"><button class="btn">Logout</button></a> -->
+          <div class="container">
+            <section>
+                <!-- <div class="nine">
+                    <h1>FRIENDLIST<span>DONT KEEP PAYMENTS PENDING</span></h1>
+                  </div> -->
+                 <div class="tbl-header">
+                  <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                      <tr>
+                        <th>FRIEND LIST</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+                <div class="tbl-content">
+                  <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                      {% for friend in userfriends %}
+                      <tr>
+                        <td>{{ friend.username }}</td>
+                        <td><a href="/Selectfriends/{{amount}}/{{desc }}/{{friend.id}}" style="text-decoration:none;">
+                          <button class="button-56" role="button">ADD FRIEND</button>
+                        </a></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                <div class="buttons">
+                  <a href="/Addfriend/{{ amount }}/{{ desc }}" class="btn effect01"><span>SPLIT</span></a>
+                </div> 
+              </section>
+        </div>
+        
+          
+        
+    
+          
+
+
+
+
+        <!-- <div class="container">
+            <a href="{{ url_for('logout') }}"><button class="btn">Logout</button></a> -->
             <!-- <div class="content">
                 
                 <h2>SplitBill</h2>
@@ -29,7 +71,7 @@
             <!-- <div class="app-title">SplitBill</div> -->
             <!-- <button id="Button" onclick="change()">click-me</button> -->
             <!-- <button id="Button" onclick="change()">click-me</button> -->
-          <div class="screen">
+          <!-- <div class="screen">
             <div class="screen-body">
               <div class="screen-body-item">
                 <div class="app-form">
@@ -40,16 +82,16 @@
                   </div>
                   <br><br>
                   {% endfor %}
-                </div>
-                <div class="buttons">
+                </div> -->
+                <!-- <div class="buttons">
                     <a href="/Addfriend/{{ amount }}/{{ desc }}" class="btn effect01"><span>SPLIT</span></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div>  -->
       
 </body>
 </html>
