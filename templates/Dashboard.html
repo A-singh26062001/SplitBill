@@ -4,13 +4,75 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='dashboard.css') }}">
+    
     <title>Dashboard</title>
 </head>
 <body>
-    <h2>DASHBOARD</h2>
-    {% for t in trans %}
-    <div>
-        {{ t.user.username }}-->
+    <!-- <nav>
+        <div class="navicon">
+          <div></div>
+        </div> -->
+        <a href="/UserPage/{{ current_user.username }}"><button class="navbtn" role="button">NEW TRANSACTION</button></a>
+        <a href="{{ url_for('logout') }}"><button class="navbtn" role="button">LOGOUT</button></a>
+      <!-- </nav> -->
+    <div class="container">
+        <section>
+            <!--for demo wrap-->
+            <div class="nine">
+                <h1>Dashboard<span>DONT KEEP PAYMENTS PENDING</span></h1>
+              </div>
+            <div class="tbl-header">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                  <tr>
+                    <!-- <th>Code</th> -->
+                    <th>LENDER NAME</th>
+                    <th>BORROWER NAME</th>
+                    <th>ITEM</th>
+                    <th>AMOUNT</th>
+                    <th>PENDING</th>
+    
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="tbl-content">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                {% for t in trans %}
+                  <tr>
+                    <td>{{ t.user.username }}</td>
+                    <td>{{ t.borrower_name }} </td>
+                    <td>{{ t.desc }}</td>
+                    <td>{{ t.amt|round(1, 'floor') }}</td>
+                    <td><a href="/Dashboard/{{ t.id }}">
+                        <button class="button-64" role="button"><span class="text">SETTLE TRANSACTION</span></button>
+                    </a></td>
+                  </tr>
+                
+                {% endfor %} 
+                </tbody>
+              </table>
+            </div>
+          </section>
+    </div>
+    
+      
+    
+
+
+
+
+
+
+
+
+
+    <!-- <h2>DASHBOARD</h2>
+    {% for t in trans %} -->
+    <!-- <div>
+        {{ t.user.username }}
         {{ t.borrower_name }}
         {{ t.amt }}
         {{ t.desc }}
@@ -18,15 +80,15 @@
         <a href="/Dashboard/{{ t.id }}">
             <button>SETTLE TRANSACTION</button>
         </a>
-        <!-- {{ t.date_created }} -->
+         {{ t.date_created }} -->
         
-    </div>
+    <!-- </div> 
     {% endfor %}
     <div>
         <a href="/UserPage/{{ current_user.username }}"><button>ADD NEW TRANSACTION</button></a>
     </div>
     <div>
         <a href="{{ url_for('logout') }}"><button class="app-form-button">Log-Out</button></a>
-    </div>
+    </div> -->
 </body>
 </html>
