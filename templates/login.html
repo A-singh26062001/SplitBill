@@ -13,7 +13,7 @@
       {% endfor %}
     </div>
     <div class="wrapper">
-      <div class="title">SPLIT IT</div>
+      <img src="/static/logo.png">
       <form method="POST" action="">
         {{ form.hidden_tag() }}
         <div class="field">
@@ -62,22 +62,18 @@
             {{ form.remember }} -->
           <!-- </div> -->
 
-          <div class="pass-link"><a href="#">Forgot password?</a></div>
+          <!-- <div class="pass-link"><a href="#">Forgot password?</a></div> -->
         <div class="field">
           <!-- <input type="submit" value="Login"> -->
           {{ form.submit }}
         </div>
+
         <div class="signup-link">Not a member? <a href="{{ url_for('register') }}">Signup now</a></div>
-        <div class="signup-link">or Connect With Social Media</div>
+       
+        
         <div class="signup-link">      </div>
         
-        <div class="main_div">
-      
-            <div class="social_icons">
-              <a href="#"><i class="fab fa-facebook-f"></i> <span>Facebook</span></a>
-              <a href="#"><i class="fab fa-twitter"></i><span>Twitter</span></a>
-            </div>
-        </div>
+       
 
 
       </form>
@@ -86,3 +82,4 @@
     </div>
   </body>
 </html>
+

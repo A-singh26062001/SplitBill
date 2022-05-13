@@ -7,7 +7,7 @@
   body {
     /* background: linear-gradient(to right, #7d445b 0%, #e2768d 100%); */
     font-size: 12px;
-    background-image: url("friendsbg.jpg");
+    background-image: url("dsbg.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
   }
@@ -122,7 +122,7 @@ nav:hover {
   /* margin-bottom: 25%; */
   /* padding-bottom: 8%; */
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: rgba(255, 255, 255, .15);
   backdrop-filter: blur(10px);
 }
@@ -154,7 +154,7 @@ th{
   text-align: center;
   
   font-family:"Playfair Display", serif;
-  font-size:48px; 
+  font-size:58px; 
   text-transform:uppercase;
   font-weight: 400; 
   color:rgb(232, 219, 219); 
