@@ -98,7 +98,8 @@ table{
 }
 .tbl-header{
   background-color: rgba(238, 230, 230, 0.603);
-  border-radius: 10px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
  }
 .tbl-content{
 
@@ -106,7 +107,7 @@ table{
   overflow-x:auto;
   margin-top: 0px;
   padding-top: 10px;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 2px solid rgba(255,255,255,0.3);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 
@@ -136,7 +137,7 @@ td{
   letter-spacing:1px;
   /* font-size: 12px; */
   color: rgba(255, 255, 255, 0.93);
-  border-bottom: solid 1px rgba(255,255,255,0.1);
+  border-bottom: solid 2px rgba(255,255,255,0.1);
 }
 
 
@@ -220,7 +221,7 @@ CSS */
     width: 6px;
 } 
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-box: inset 0 0 6px rgba(0,0,0,0.3); 
 } 
 ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
