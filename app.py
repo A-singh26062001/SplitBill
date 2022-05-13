@@ -174,6 +174,7 @@ def selectfriends(amount,desc,id):
 @login_required
 def addfriend(amount,desc):
     amt=amount/(len(ids)+1)
+    # amt=round(amt)
     for i in range(len(ids)):
         borr=User.query.filter_by(id=ids[i]).first()
         t=Transaction(borrower_name=borr.username,amt=amt,desc=desc,settlement=False,user=current_user)
