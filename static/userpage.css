@@ -7,9 +7,10 @@
   body {
     /* background: linear-gradient(to right, #efbacf 0%, #6fe7e5 120%); */
     font-size: 12px;
-    background-image: url("bg1.jpg");
+    background-image: url("upbg1.jpg");
     background-repeat: no-repeat;
-    background-size: 100% 200%;
+    background-size: 100% 100%;
+  
   }
   
   /* .nav-btn {
@@ -155,7 +156,7 @@
     }
     
   .content h2:nth-child(2) {
-      color: #da3d3d;
+      color: #ea1270e1;
       animation: animate 4s ease-in-out infinite;
     }
     
@@ -382,7 +383,7 @@
     width: 40%;
     text-decoration: none;
     background:transparent;
-    border-color:#ed7d45;
+    /* border-color:#ed7d45; */
     border-radius: 10px;
     color: #f0f4f4;
     font-size: 30px;
@@ -390,6 +391,10 @@
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     cursor: pointer;
     outline: none;
+    box-shadow:
+    0 0 20px #fff,
+    -10px 0 80px #f0f,
+    10px 0 80px #0ff;
     
   }
   
