@@ -27,8 +27,10 @@
                 <thead>
                   <tr>
                     <!-- <th>Code</th> -->
+                    <th></th>
                     <th>LENDER NAME</th>
                     <th>BORROWER NAME</th>
+                    <th>TRANSACTION DATE</th>
                     <th>ITEM</th>
                     <th>AMOUNT</th>
                     <th>PENDING</th>
@@ -42,8 +44,11 @@
                 <tbody>
                 {% for t in trans %}
                   <tr>
+                    <!-- <td class="logo"></td> -->
+                    <td><img src="/static/usrl1.png" class="userlogo"></td>
                     <td>{{ t.user.username }}</td>
                     <td>{{ t.borrower_name }} </td>
+                    <td>{{ t.date_created.strftime("%d-%b-%y") }}</td>
                     <td>{{ t.desc }}</td>
                     <td>{{ t.amt|round(1, 'floor') }}</td>
                     <td><a href="/Dashboard/{{ t.id }}" style="text-decoration:none;">

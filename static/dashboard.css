@@ -93,7 +93,7 @@
   margin-bottom: 15px;
 } */
 table{
-  width:100%;
+  width:95%;
   table-layout: fixed;
 }
 .tbl-header{
@@ -115,7 +115,7 @@ table{
 }
 th{
   padding: 20px 15px;
-  text-align: left;
+  text-align: center;
   
   font-family:"Playfair Display", serif;
   font-size:18px; 
@@ -126,8 +126,8 @@ th{
   text-transform: uppercase;
 }
 td{
-  padding: 15px;
-  text-align: left;
+  padding: 12px;
+  text-align: center;
   /* text-align:center; */
   vertical-align:middle;
   font-weight: 600;
@@ -139,7 +139,14 @@ td{
   color: rgba(255, 255, 255, 0.93);
   border-bottom: solid 2px rgba(255,255,255,0.1);
 }
-
+.userlogo td{
+  padding: 5px;
+}
+.userlogo{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
 
 /* demo styles */
 
