@@ -186,8 +186,10 @@ form .signup-link a:hover{
 }
 
 .alert-error {
+  margin-top: 10px;
   padding: 8px;
   color: red;
+  font-weight: 600;
 }
 /* .title{
   height: 20px;
